@@ -1,0 +1,66 @@
+#main, html {
+    background-color: rgb(237,238,240);
+}
+
+#user-greeting {
+    color: white;
+    cursor: default;
+}
+
+.messages-wrap {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(227, 228, 232);
+    overflow-y: scroll;
+    max-height: 80vh;
+    min-height: 80vh;
+}
+
+#messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#messages li {
+    padding: 5px 10px;
+}
+
+#messages li  p {
+    margin: 0
+}
+
+#messages .user {
+    color: rgb(68, 101, 137);
+    font-size: 14px;
+    font-weight: bold
+}
+
+#messages .content {
+    font-size: 15px
+}
+
+.message-send {
+    background-color: rgb(250, 251, 252);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-left: 1px solid rgb(227, 228, 232);
+    border-right: 1px solid rgb(227, 228, 232);
+    border-bottom: 1px solid rgb(227, 228, 232);
+}
+
+.bg-custom-green {
+    background-color: rgb(71, 151, 134);
+}
+
+.btn-custom-green {
+    background-color: rgb(71, 151, 134);
+    color: white;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s
+}
+
+.fade-enter, .fade-leave-active {
+    opacity: 0
+}
