@@ -38,6 +38,10 @@
     margin: 0;
 }
 
+.vacancy-company-contract-type, .vacancy-company-contract-time, .vacancy-company-contract-location {
+    margin: 0;
+}
+
 .bg-custom-green {
     background-color: rgb(71, 151, 134);
 }

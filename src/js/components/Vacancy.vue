@@ -2,20 +2,21 @@
     <article class="col-12 content-wrap vacancy clearfix">
         <header class="vacancy-header">
             <h6>{{ vacancy.title }}</h6>
-            <p>Тип контракта: {{ vacancy.contract_type }}</p>
-            <p>Время: {{ vacancy.contract_time }}</p>
-            <p>Локация: {{ vacancy.location }}</p>
+            <div class="dropdown-divider"></div>
+            <p class="vacancy-company-contract-type">Contract type: {{ vacancy.contract_type }}</p>
+            <p class="vacancy-company-contract-time">Time: {{ vacancy.contract_time }}</p>
+            <p class="vacancy-company-location">Location: {{ vacancy.location }}</p>
         </header>
         <div class="dropdown-divider"></div>
         <div class="vacancy-content">
             <div>
-                <h5>Описание</h5>
+                <h5>Description</h5>
                 <p>{{ vacancy.description }}</p>
             </div>
         </div>
         <div class="dropdown-divider"></div>
-        <button class="btn btn-custom-green float-left" @click="back">Назад</button>
-        <button class="btn btn-custom-green float-right disabled">Откликнуться</button>
+        <button class="btn btn-custom-green float-left" @click="back">Back</button>
+        <button class="btn btn-custom-green float-right disabled">Respond</button>
     </article>
 </template>
 
@@ -39,7 +40,7 @@
             })
         },
         created() {
-            this.vacancy = this.jobs.find(el => el.title === this.$route.params.id);
+            this.vacancy = this.jobs[this.$route.params.id];
         }
     }
 </script>
