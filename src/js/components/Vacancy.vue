@@ -1,5 +1,5 @@
 <template>
-    <article class="col-12 content-wrap vacancy clearfix">
+    <article class="col-12 content-wrap vacancy clearfix" v-if="!error">
         <header class="vacancy-header">
             <h6>{{ vacancy.title }}</h6>
             <div class="dropdown-divider"></div>
@@ -18,6 +18,9 @@
         <button class="btn btn-custom-green float-left" @click="back">Back</button>
         <button class="btn btn-custom-green float-right disabled">Respond</button>
     </article>
+    <article v-else>
+        <p class="alert alert-danger">{{ error }} {{ expiredTime }} seconds...</p>
+    </article>
 </template>
 
 <script>
@@ -26,6 +29,8 @@
         name: "Vacancy",
         data() {
             return {
+                error: '',
+                expiredTime: 3,
                 vacancy: {}
             }
         },
@@ -40,7 +45,21 @@
             })
         },
         created() {
-            this.vacancy = this.jobs[this.$route.params.id];
+            const vacancy = this.jobs[this.$route.params.id];
+            const self = this;
+            if(vacancy) {
+                this.vacancy = vacancy;
+            } else {
+                this.error = 'Vacancy not found, redirect to main page: ';
+                this.timer = setTimeout(function timer() {
+                    if(self.expiredTime-- > 1) {
+                        self.timer = setTimeout(timer, 1000);
+                    } else {
+                        clearTimeout(self.timer);
+                        self.$router.push('/');
+                    }
+                }, 1000);
+            }
         }
     }
 </script>

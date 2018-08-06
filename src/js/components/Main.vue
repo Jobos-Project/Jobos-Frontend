@@ -1,9 +1,8 @@
 <template>
     <div>
-        <form @submit.prevent="search" class="form-group form-inline content-wrap">
+        <form @submit.prevent class="form-group form-inline content-wrap">
             <div class="btn-group col-12">
-                <input type="text" class="form-control col-8 offset-1" placeholder="Search...">
-                <input type="submit" class="btn btn-custom-green col-2 disabled" value="Search">
+                <input type="text" class="form-control col-10 offset-1" v-model="settings.search" placeholder="Search...">
                 <button type="button" class="btn btn-custom-green dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
@@ -35,6 +34,7 @@
         data() {
             return {
                 settings: {
+                    search: '',
                     salary: false
                 }
             }
@@ -46,10 +46,29 @@
         },
         methods: {
             search() {
-                //Search
+                return this.jobs.filter(job => {
+                    return job.title.toLowerCase().includes(this.settings.search.toLowerCase());
+                });
+            },
+            sortBySalary(array = null) {
+                if(array) {
+                    return array.filter(el => !!(parseFloat(el.salary)));
+                }
             },
             sortJobs() {
-                return (this.settings.salary)? this.jobs.filter(el => !!(parseFloat(el.salary))): this.jobs;
+                if(this.settings.salary) {
+                    return this.sortBySalary(this.search());
+                }  else {
+                    if(this.settings.search.length > 2) {
+                        return this.search();
+                    } else {
+                        if(this.settings.salary) {
+                            return this.sortBySalary(this.jobs);
+                        } else {
+                            return this.jobs;
+                        }
+                    }
+                }
             }
         },
     }
