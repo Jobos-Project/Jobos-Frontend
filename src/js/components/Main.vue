@@ -57,16 +57,12 @@
             },
             sortJobs() {
                 if(this.settings.salary) {
-                    return this.sortBySalary(this.search());
+                    return (this.settings.search.length > 2)? this.sortBySalary(this.search()): this.sortBySalary(this.jobs);
                 }  else {
                     if(this.settings.search.length > 2) {
                         return this.search();
                     } else {
-                        if(this.settings.salary) {
-                            return this.sortBySalary(this.jobs);
-                        } else {
-                            return this.jobs;
-                        }
+                        return (this.settings.salary)? this.sortBySalary(this.jobs): this.jobs;
                     }
                 }
             }
