@@ -8,7 +8,6 @@ const { VueLoaderPlugin } = require('vue-loader');
 const JavaScriptObfuscator = require('webpack-obfuscator');
 
 const config = {
-    entry: './src/js/app.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
@@ -69,6 +68,7 @@ const config = {
 };
 
 module.exports = (env, argv) => {
+    config.entry = ['babel-polyfill', './src/js/app.js'];
     if(argv.mode === 'production') {
         config.mode = "production";
         config.plugins.push(
@@ -127,6 +127,7 @@ module.exports = (env, argv) => {
             }
         );
     } else {
+        config.entry = './src/js/app.js';
         config.mode = "development";
     }
     return config;
